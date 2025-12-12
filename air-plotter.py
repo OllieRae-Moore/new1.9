@@ -11,4 +11,15 @@ You would plot a point at (68+20+25+5)/4 = 29.5
 
 The X-axis should be the date, the Y-axis should be the average pollution.
 '''
+import pandas as pd
+import matplotlib.pyplot as plt
 
+data = pd.read_csv("leeds-centre-air-quality.csv")
+data["date"] = pd.to_datetime(data['date'])
+data['average'] = data[[' pm25',' pm10',' o3',' no2']].mean(axis=1)
+plt.figure(figsize=(12,6)) #had to stretch x axis since labels overlapped and its easier to read
+plt.plot(data["date"], data['average'])
+plt.xlabel("Date")
+plt.ylabel("average pollution")
+plt.title("Oliver Rae-Moore")
+plt.show()
